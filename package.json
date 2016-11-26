@@ -1,0 +1,31 @@
+{
+  "name": "seq-tools",
+  "version": "1.0.0",
+  "description": "Modules for working with biological sequence data",
+  "main": "index.js",
+  "scripts": {
+    "test": "./bin/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jason-weirather/js-seq-tools.git"
+  },
+  "keywords": [
+    "Bioinformatics",
+    "Nucleotide",
+    "Sequence",
+    "Alignment",
+    "Genome",
+    "Genomics",
+    "Gene",
+    "Transcript",
+    "Transcriptome",
+    "Simulation"
+  ],
+  "author": "Jason L Weirather",
+  "license": "(Apache-2.0 OR MIT)",
+  "bugs": {
+    "url": "https://github.com/jason-weirather/js-seq-tools/issues"
+  },
+  "homepage": "https://github.com/jason-weirather/js-seq-tools#readme"
+}
