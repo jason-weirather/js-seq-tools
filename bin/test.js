@@ -27,3 +27,8 @@ if (seq3.equals(seq1)) {
 if (seq3.length !== tlen) {
   throw "ERROR: length fail\n";
 } else { console.log('Length pass '+seq3.length); }
+
+console.log('Testing formats');
+
+var bgzf = ST.formats.compression.bgzf.bgzf_test();
+console.log(bgzf);

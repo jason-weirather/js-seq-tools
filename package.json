@@ -29,6 +29,9 @@
   },
   "homepage": "https://github.com/jason-weirather/js-seq-tools#readme",
   "dependencies": {
-    "pako": "^1.0.3"
+    "crc-32": "1.0.1",
+    "pako": "^1.0.3",
+    "stream": "0.0.2",
+    "util": "0.10.3"
   }
 }
