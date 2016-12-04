@@ -30,5 +30,5 @@ if (seq3.length !== tlen) {
 
 console.log('Testing formats');
 
-var bgzf = ST.formats.compression.bgzf.bgzf_test();
-console.log(bgzf);
+//var bgzf = ST.formats.compression.bgzf.bgzf_test();
+//console.log(bgzf);
