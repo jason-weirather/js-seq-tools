@@ -4,7 +4,8 @@
   "description": "Modules for working with biological sequence data",
   "main": "index.js",
   "scripts": {
-    "test": "./bin/test.js"
+    "test": "./bin/test.js",
+    "bgzfzip":"./scripts/bgzfzip.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   },
   "homepage": "https://github.com/jason-weirather/js-seq-tools#readme",
   "dependencies": {
+    "argparse": "1.0.9",
     "crc-32": "1.0.1",
     "pako": "^1.0.3",
     "stream": "0.0.2",
