@@ -10,8 +10,10 @@ const SEQTOOLS = {
   formats: {  
     compression: {
     bgzf:require('./lib/formats/compression/bgzf.js'),
-    gzip:require('./lib/formats/compression/gzip.js')
-                  }
+                 },
+    alignments: {
+    bam:require('./lib/formats/alignments/bam.js'),
+                }
             }
 }
 
