@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "./bin/test.js",
-    "bgzfzip":"./scripts/bgzfzip"
+    "bgzfzip":"./scripts/bgzfzip",
+    "bgzfunzip":"./scripts/bgzfunzip"
   },
   "repository": {
     "type": "git",
