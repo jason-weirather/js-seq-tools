@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./bin/test.js",
     "bgzfzip":"./scripts/bgzfzip",
-    "bgzfunzip":"./scripts/bgzfunzip"
+    "bgzfunzip":"./scripts/bgzfunzip",
+    "bam2sam":"./scripts/bam2sam"
   },
   "repository": {
     "type": "git",
