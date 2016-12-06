@@ -1,6 +1,7 @@
 // This is the entrypoint where we export our various modules
 // lets try and set these up by our directoy structure here
 const SEQTOOLS = {
+  streams:require('./lib/streams.js'),
   alignment:require('./lib/sequence.js'),
   sequence:require('./lib/sequence.js'),
   random:require('./lib/random.js'),
