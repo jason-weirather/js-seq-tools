@@ -14,7 +14,7 @@ var main = function (args) {
   if (args.output) {
     of = fs.createWriteStream(args.output);
   }
-  var bamconv = bam.createBAMInputStream();
+  var bamconv = new bam.BAMInputStream();
   inf.pipe(bamconv).on('data',function (indata) {
     if (indata.header) { of.write(''+indata.header+"\n"); }
     if (indata.bam) { of.write(''+indata.bam+"\n"); }

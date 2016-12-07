@@ -13,7 +13,7 @@ const SEQTOOLS = {
     bgzf:require('./lib/formats/compression/bgzf.js'),
                  },
     alignments: {
-    bam:require('./lib/formats/alignments/bam.js'),
+    bam:require('./lib/formats/alignment/bam.js'),
                 }
             }
 }

@@ -14,7 +14,7 @@ var main = function (args) {
   if (args.output) {
     of = fs.createWriteStream(args.output);
   }
-  var zip = new bgzf.createBGZFCompress({level:args.level});
+  var zip = new bgzf.BGZFCompress({level:args.level});
   inf.pipe(zip).pipe(of);
 }
 
