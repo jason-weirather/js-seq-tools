@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "./bin/test.js",
-    "bgzfzip":"./scripts/bgzfzip",
-    "bgzfunzip":"./scripts/bgzfunzip",
-    "bam2sam":"./scripts/bam2sam"
+    "bgzfzip":"./scripts/bgzfzip.js",
+    "bgzfunzip":"./scripts/bgzfunzip.js",
+    "bam2sam":"./scripts/bam2sam.js"
   },
   "repository": {
     "type": "git",
