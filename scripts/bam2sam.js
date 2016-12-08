@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const ArgumentParser = require('argparse').ArgumentParser;
-const bam = require('../index.js').formats.alignments.bam;
+const bam = require('../index.js').formats.alignment.bam;
 const fs = require('fs');
 
 var main = function (args) {
