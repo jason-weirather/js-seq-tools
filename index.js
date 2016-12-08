@@ -14,6 +14,7 @@ const SEQTOOLS = {
                  },
     alignment: {
     bam:require('./lib/formats/alignment/bam.js'),
+    sam:require('./lib/formats/alignment/sam.js')
                 }
             }
 }

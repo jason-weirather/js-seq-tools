@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const ArgumentParser = require('argparse').ArgumentParser;
+const bgzf = require('../index.js').formats.compression.bgzf;
 const bam = require('../index.js').formats.alignment.bam;
 const fs = require('fs');
 
@@ -14,8 +15,10 @@ var main = function (args) {
   if (args.output) {
     of = fs.createWriteStream(args.output);
   }
-  var bamconv = new bam.BAMInputStream();
-  inf.pipe(bamconv).on('data',function (indata) {
+  //var bamconv = new bam.BAMInputStream();
+  var bgzfun = new bgzf.BGZFDecompress();
+  var bamconv = new bam.DecompressedToBAMObj();
+  inf.pipe(bgzfun).pipe(bamconv).on('data',function (indata) {
     if (indata.header) { of.write(''+indata.header+"\n"); }
     if (indata.bam) { of.write(''+indata.bam+"\n"); }
   });
