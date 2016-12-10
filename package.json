@@ -7,7 +7,9 @@
     "test": "./bin/test.js",
     "bgzfzip":"./scripts/bgzfzip.js",
     "bgzfunzip":"./scripts/bgzfunzip.js",
-    "bam2sam":"./scripts/bam2sam.js"
+    "bam2sam":"./scripts/bam2sam.js",
+    "sam2bam":"./scripts/sam2bam.js",
+    "samview":"./scripts/samview.js"
   },
   "repository": {
     "type": "git",
