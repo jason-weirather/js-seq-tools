@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 "use strict";
+// READ A SAM FILE OUTPUT A BAM FILE
+// PRE: A file, or STDIN
+// POST: Write either a bam file or stream bam to STDOUT
+
 const ArgumentParser = require('argparse').ArgumentParser;
 const bgzf = require('../index.js').formats.compression.bgzf;
 const sam = require('../index.js').formats.alignment.sam;
@@ -15,7 +19,7 @@ var main = function (args) {
   // Setup Outputs
   var bgzfz = new bgzf.BGZFCompress();
   var of;
-  if (args.output) {
+  if (args.output!=='-') {
     of = bgzfz.pipe(fs.createWriteStream(args.output));
   } else {
     of = bgzfz.pipe(process.stdout);
@@ -40,7 +44,7 @@ var main = function (args) {
   samconv.on('end',function() {
      //console.log('end');
      bgzfz.end();
-     if (args.output) { of.end(); }
+     if (args.output!=='-') { of.end(); }
   });
 }
 
@@ -49,13 +53,13 @@ var do_inputs = function () {
   var parser = new ArgumentParser({
     version:'0.0.1',
     addHelp:true,
-    description:'Convert a BAM to a SAM file.',
+    description:'Convert a SAM to a BAM file.',
     formatterClass:ArgumentParser.ArgumentsDefaultsHelpFormatter
   });
 
   //Add arguments
   parser.addArgument(['input'],{help:"BAM to extract or - for STDIN"});
-  parser.addArgument(['-o','--output'],{help:"Specify a file, otherwise output to STDOUT"});
+  parser.addArgument(['-o','--output'],{help:"REQUIRED Specify a file, otherwise use - to STDOUT",required:true});
   var args =  parser.parseArgs();
   return args;
 }
