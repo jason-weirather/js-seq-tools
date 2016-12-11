@@ -19,7 +19,7 @@ var main = function (args) {
   var bgzfun = new bgzf.BGZFDecompress();
   var bamconv = new bam.DecompressedToBAMObj();
   inf.pipe(bgzfun).pipe(bamconv).on('data',function (indata) {
-    if (indata.header) { of.write(''+indata.header+"\n"); }
+    if (indata.header) { of.write(''+indata.header); }
     if (indata.bam) { of.write(''+indata.bam+"\n"); }
   });
 }

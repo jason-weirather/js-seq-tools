@@ -24,27 +24,17 @@ var main = function (args) {
   } else {
     of = bgzfz.pipe(process.stdout);
   }
-  //var bamconv = new bam.BAMInputStream();
   var samconv = new sam.DataToSAMObj();
   inf.pipe(samconv).on('data',function (indata) {
-    //console.log(samconv._z+' '+samconv._c+' hi');
-    //console.log(indata);
     if (indata.header) { 
       bgzfz.write(indata.header.bam_data); 
     }
     else if (indata.sam) { 
-      //indata.sam.toString();
-      //console.log(indata.sam._sam_line);
       bgzfz.write(indata.sam.bam_data); 
     }
-    //let b = new Buffer(5);
-    //b.write('tapir');
-    //bgzfz.write(b);
   });
-  samconv.on('end',function() {
-     //console.log('end');
+  samconv.on('finish',function() {
      bgzfz.end();
-     if (args.output!=='-') { of.end(); }
   });
 }
 

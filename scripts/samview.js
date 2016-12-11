@@ -31,7 +31,6 @@ var main = function (args) {
     of = outfile;
   }
 
-  //var bamconv = new bam.BAMInputStream();
   let p;
   var samconv;
   var bgzfun;
@@ -50,7 +49,7 @@ var main = function (args) {
       // if its a bam output we always need header
       bgzfz.write(indata.header.bam_data);
     } else if (indata.header && (args.header || args.header_only)) { 
-      of.write(''+indata.header+"\n"); 
+      of.write(''+indata.header); 
       if (args.header_only) {
         this.push(null);
         return;
@@ -88,10 +87,9 @@ var main = function (args) {
   });
   // in the a case of bam listen for when to close out or writing pipes.
   if (args.bam_output) {
-    let conv = samconv || bamconv;
-    conv.on('end',function () {
+    let conv = bgzfun || samconv;
+    conv.on('finish',function () {
       bgzfz.end();
-      if (args.output) { of.end(); }
     });
   }
 }
