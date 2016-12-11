@@ -6,7 +6,8 @@ const SEQTOOLS = {
   sequence:require('./lib/sequence.js'),
   random:require('./lib/random.js'),
   simulate: {  
-    emit:require('./lib/simulate/emit.js')
+    emit:require('./lib/simulate/emit.js'),
+    permute:require('./lib/simulate/permute.js')
             },
   formats: {  
     compression: {
