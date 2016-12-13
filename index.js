@@ -2,9 +2,10 @@
 // lets try and set these up by our directoy structure here
 const SEQTOOLS = {
   streams:require('./lib/streams.js'),
-  alignment:require('./lib/sequence.js'),
+  alignment:require('./lib/alignment.js'),
   sequence:require('./lib/sequence.js'),
   random:require('./lib/random.js'),
+  range:require('./lib/range.js'),
   simulate: {  
     emit:require('./lib/simulate/emit.js'),
     permute:require('./lib/simulate/permute.js')
