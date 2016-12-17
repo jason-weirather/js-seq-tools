@@ -4,9 +4,10 @@ const SEQTOOLS = {
   streams:require('./lib/streams.js'),
   alignment:require('./lib/alignment.js'),
   aligner:require('./lib/aligner.js'),
-  sequence:require('./lib/sequence.js'),
+  mapping:require('./lib/mapping.js'),
   random:require('./lib/random.js'),
   range:require('./lib/range.js'),
+  sequence:require('./lib/sequence.js'),
   simulate: {  
     emit:require('./lib/simulate/emit.js'),
     permute:require('./lib/simulate/permute.js')
@@ -18,7 +19,10 @@ const SEQTOOLS = {
     alignment: {
     bam:require('./lib/formats/alignment/bam.js'),
     sam:require('./lib/formats/alignment/sam.js')
-                }
+                },
+    mapping: {
+    GPD:require('./lib/formats/mapping/GPD.js')
+             }
             }
 }
 
