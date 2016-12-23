@@ -22,7 +22,10 @@ const SEQTOOLS = {
                 },
     mapping: {
     GPD:require('./lib/formats/mapping/GPD.js')
-             }
+             },
+    sequence: {
+      fasta:require('./lib/formats/sequence/fasta.js')
+              }
             }
 }
 
