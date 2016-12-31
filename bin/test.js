@@ -36,7 +36,7 @@ seq3.name = 'Qseq';
 var aln = aligner.align({reference:seq1,query:seq3}).get_entry(0);
 var alnstr = aln.pretty_print().split("\n");
 //console.log(alnstr[1]);
-console.log("\n2. NUCLEOTIDE ALIGNMENT");
+console.log("\n2. BASIC NUCLEOTIDE ALIGNMENT");
 var exp4 = 'Q - 1: ATTTCTTTCTCGTCCGAGGGG--A-GTTGTCAATATTCTCATCGGCTCTA';
 if (alnstr[1] !== exp4) throw new Error ("-- FAIL -- problem with alignment");
 else console.log("-- PASS -- Alignment is okay");
@@ -48,4 +48,17 @@ else console.log("-- PASS -- Made sam line succesfully");
 var sam = new ST.formats.alignment.sam.SAM({sam_line:aln.sam_line});
 if (sam.sam_line !== aln.sam_line) throw new Error("-- FAIL -- problem reading sam line into sam object"); 
 else console.log("-- PASS -- Loaded sam line into sam object");
-console.log(sam.to_query_map());
+sam.rseq = seq1; // Assign the rseq so you can pretty print the alignment
+//console.log(sam.pretty_print());
+var exp5 = 'Q - 1: ATTTCTTTCTCGTCCGAGGGG--A-GTTGTCAATATTCTCATCGGCTCTA';
+if (sam.pretty_print().split(/\n/)[1] !== exp5) {
+  throw new Error("-- FAIL -- unexpected pretty print of alignment");
+} else console.log("-- PASS -- pretty print success");
+console.log("\n3. BASIC NUCLEOTIDE MAPPING");
+//console.log(sam.to_reference_map().gpd_line());
+var exp6 = 'Qseq	Qseq	Rseq	-	0	98	0	98	4	0,23,25,56	21,24,56,98';
+var obs6 = sam.to_reference_map().gpd_line();
+//console.log(obs6);
+if (obs6 !== exp6) {
+  throw new Error ("-- FAIL -- unexpected gpd line");
+} else console.log("-- PASS -- GPD mapping success");
