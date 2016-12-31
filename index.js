@@ -10,7 +10,8 @@ const SEQTOOLS = {
   sequence:require('./lib/sequence.js'),
   simulate: {  
     emit:require('./lib/simulate/emit.js'),
-    permute:require('./lib/simulate/permute.js')
+    permute:require('./lib/simulate/permute.js'),
+    transcriptome:require('./lib/simulate/transcriptome.js')
             },
   formats: {  
     compression: {

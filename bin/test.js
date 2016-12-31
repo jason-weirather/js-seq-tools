@@ -62,3 +62,18 @@ var obs6 = sam.to_reference_map().gpd_line();
 if (obs6 !== exp6) {
   throw new Error ("-- FAIL -- unexpected gpd line");
 } else console.log("-- PASS -- GPD mapping success");
+
+// Test more advanced alignment features
+var seq3 = nse.sequence(200); // a new reference
+console.log(seq3.toString());
+var seq4 = ST.sequence.NucleotideSequence2Bit.concat(
+  seq3.slice(160,169),
+  seq3.slice(10,55),
+  seq3.slice(60,100),
+  seq3.slice(110,159)
+);
+//seq4 = seq4.permute({rate:0.1,random:ran});
+aln = aligner.align({reference:seq3,query:seq4}).get_entry(0);
+aln.min_intron = 5;
+console.log(aln.pretty_print());
+console.log(aln.sam_line);
