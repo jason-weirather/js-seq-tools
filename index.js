@@ -4,6 +4,7 @@ const SEQTOOLS = {
   streams:require('./lib/streams.js'),
   alignment:require('./lib/alignment.js'),
   aligner:require('./lib/aligner.js'),
+  graph:require('./lib/graph.js'),
   mapping:require('./lib/mapping.js'),
   random:require('./lib/random.js'),
   range:require('./lib/range.js'),
