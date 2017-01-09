@@ -23,7 +23,8 @@ const SEQTOOLS = {
     sam:require('./lib/formats/alignment/sam.js')
                 },
     mapping: {
-    GPD:require('./lib/formats/mapping/GPD.js')
+    GPD:require('./lib/formats/mapping/GPD.js'),
+    GFF:require('./lib/formats/mapping/GFF.js')
              },
     sequence: {
       fasta:require('./lib/formats/sequence/fasta.js')
