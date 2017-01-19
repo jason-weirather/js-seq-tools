@@ -5,19 +5,26 @@
 -   -   [PipeFitterGeneric](#pipefittergeneric)
     -   [PipeFitterLowpass](#pipefitterlowpass)
 -   [that can be read from the pipe](#that-can-be-read-from-the-pipe)
+    -   [SmithWatermanResults](#smithwatermanresults)
 
 ## PipeFitterGeneric
 
-[lib/streams.js:6-39](https://github.com/jason-weirather/js-seq-tools/blob/fc5b2b12683c983b310b5e0d9877ce5ce616f5cb/lib/streams.js#L6-L39 "Source code on GitHub")
+[lib/streams.js:6-39](https://github.com/jason-weirather/js-seq-tools/blob/adcc2e94eaaeb96d66f3bd8884321dd45899698e/lib/streams.js#L6-L39 "Source code on GitHub")
 
 A Generic buffer for data in and out to fit output to a certain size
 
 ## PipeFitterLowpass
 
-[lib/streams.js:45-75](https://github.com/jason-weirather/js-seq-tools/blob/fc5b2b12683c983b310b5e0d9877ce5ce616f5cb/lib/streams.js#L45-L75 "Source code on GitHub")
+[lib/streams.js:45-75](https://github.com/jason-weirather/js-seq-tools/blob/adcc2e94eaaeb96d66f3bd8884321dd45899698e/lib/streams.js#L45-L75 "Source code on GitHub")
 
 **Extends PipeFitterGeneric**
 
 Ensure that chunks of <maxsize> are the largest data 
 
 # that can be read from the pipe
+
+## SmithWatermanResults
+
+[lib/aligner.js:9-147](https://github.com/jason-weirather/js-seq-tools/blob/adcc2e94eaaeb96d66f3bd8884321dd45899698e/lib/aligner.js#L9-L147 "Source code on GitHub")
+
+A class describing results returned by a Smith-Waterman aligner
