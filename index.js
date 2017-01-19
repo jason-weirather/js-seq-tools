@@ -1,8 +1,8 @@
-// This is the entrypoint where we export our various modules
-// lets try and set these up by our directoy structure here
-
+/**
+* @private
+* Global for contains a pure javascript set objects to represent biological data
+*/
 const SEQTOOLS = {
-  streams:require('./lib/streams'),
   alignment:require('./lib/alignment.js'),
   aligner:require('./lib/aligner.js'),
   graph:require('./lib/graph.js'),
@@ -10,12 +10,14 @@ const SEQTOOLS = {
   random:require('./lib/random.js'),
   range:require('./lib/range.js'),
   sequence:require('./lib/sequence.js'),
-  simulate: {  
+  splice:require('./lib/splice.js'),
+  streams:require('./lib/streams'),
+  simulate: {
     emit:require('./lib/simulate/emit.js'),
     permute:require('./lib/simulate/permute.js'),
     transcriptome:require('./lib/simulate/transcriptome.js')
             },
-  formats: {  
+  formats: {
     compression: {
     bgzf:require('./lib/formats/compression/bgzf.js'),
                  },

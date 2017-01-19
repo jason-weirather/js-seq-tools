@@ -2,99 +2,161 @@
 
 ### Table of Contents
 
--   [SmithWatermanResults](#smithwatermanresults)
--   [SmithWatermanAligner](#smithwatermanaligner)
--   [SmithWatermanAlignment](#smithwatermanalignment)
--   [GenericGraph](#genericgraph)
--   [DirectedGraph](#directedgraph)
--   [UndirectedGraph](#undirectedgraph)
--   [Node](#node)
--   [Edge](#edge)
--   [lib/mapping](#libmapping)
+-   [alignment](#alignment)
+    -   [GenericAlignment](#genericalignment)
+-   [aligner](#aligner)
+    -   [private](#private)
+        -   [SmithWatermanResults](#smithwatermanresults)
+        -   [SmithWatermanAlignment](#smithwatermanalignment)
+    -   [SmithWatermanAligner](#smithwatermanaligner)
+-   [basics](#basics)
+    -   [Matrix](#matrix)
+-   [graph](#graph)
+    -   [private](#private-1)
+        -   [GenericGraph](#genericgraph)
+    -   [DirectedGraph](#directedgraph)
+    -   [UndirectedGraph](#undirectedgraph)
+    -   [Node](#node)
+    -   [Edge](#edge)
+-   [mapping](#mapping)
     -   [Exon](#exon)
     -   [GenericMapping](#genericmapping)
     -   [Transcript](#transcript)
     -   [AlignmentDerivedMapping](#alignmentderivedmapping)
     -   [GenericTranscriptome](#generictranscriptome)
     -   [Gene](#gene)
--   [PipeFitterGeneric](#pipefittergeneric)
-    -   [length](#length)
-    -   [drain](#drain)
-    -   [add](#add)
-    -   [putback](#putback)
-    -   [remove](#remove)
-    -   [ready](#ready)
--   [PipeFitterLowpass](#pipefitterlowpass)
--   [PipeFitterHighpass](#pipefitterhighpass)
+-   [random](#random)
+    -   [RandomSeeded](#randomseeded)
+    -   [uuid4](#uuid4)
+-   [range](#range)
+    -   [Range](#range-1)
+    -   [Bed](#bed)
+    -   [BedArray](#bedarray)
+-   [sequence](#sequence)
+    -   [GenericNucleotideSequence](#genericnucleotidesequence)
+    -   [rc_nt](#rc_nt)
+    -   [NucleotideSequence2Bit](#nucleotidesequence2bit)
+-   [splice](#splice)
+    -   [SpliceAnalysis](#spliceanalysis)
+-   [streams](#streams)
+    -   [PipeFitterGeneric](#pipefittergeneric)
+        -   [constructor](#constructor)
+        -   [length](#length)
+        -   [drain](#drain)
+        -   [add](#add)
+        -   [putback](#putback)
+    -   [PipeFitterLowpass](#pipefitterlowpass)
+    -   [PipeFitterHighpass](#pipefitterhighpass)
 
-## SmithWatermanResults
+## alignment
 
-[lib/aligner.js:9-147](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/aligner.js#L9-L147 "Source code on GitHub")
+[lib/alignment.js:13-279](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/alignment.js#L13-L279 "Source code on GitHub")
+
+Classes containing alignments
+
+### GenericAlignment
+
+[lib/alignment.js:13-279](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/alignment.js#L13-L279 "Source code on GitHub")
+
+## aligner
+
+[lib/aligner.js:22-160](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/aligner.js#L22-L160 "Source code on GitHub")
+
+Contains classes for doing alignments
+
+### private
+
+[lib/aligner.js:22-160](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/aligner.js#L22-L160 "Source code on GitHub")
+
+Members are not exported
+
+#### SmithWatermanResults
+
+[lib/aligner.js:22-160](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/aligner.js#L22-L160 "Source code on GitHub")
 
 A class describing multiple results returned by a Smith-Waterman aligner
 
-## SmithWatermanAligner
+#### SmithWatermanAlignment
 
-[lib/aligner.js:152-225](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/aligner.js#L152-L225 "Source code on GitHub")
-
-A class for performing local alignment
-
-## SmithWatermanAlignment
-
-[lib/aligner.js:230-275](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/aligner.js#L230-L275 "Source code on GitHub")
+[lib/aligner.js:247-292](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/aligner.js#L247-L292 "Source code on GitHub")
 
 **Extends GenericAlignment**
 
 A signle alignment from among Smith-Waterman aligner results
 
-## GenericGraph
+### SmithWatermanAligner
 
-[lib/graph.js:7-86](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/graph.js#L7-L86 "Source code on GitHub")
+[lib/aligner.js:167-240](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/aligner.js#L167-L240 "Source code on GitHub")
+
+A class for performing a local alignment
+
+## basics
+
+[lib/basics.js:12-41](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/basics.js#L12-L41 "Source code on GitHub")
+
+basic objects of universal importance
+
+### Matrix
+
+[lib/basics.js:12-41](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/basics.js#L12-L41 "Source code on GitHub")
+
+## graph
+
+[lib/graph.js:20-99](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L20-L99 "Source code on GitHub")
+
+classes for describing graphs
+
+### private
+
+[lib/graph.js:20-99](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L20-L99 "Source code on GitHub")
+
+classes for describing graphs
+
+#### GenericGraph
+
+[lib/graph.js:20-99](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L20-L99 "Source code on GitHub")
 
 Generic graph should be overridden
 
-## DirectedGraph
+### DirectedGraph
 
-[lib/graph.js:91-109](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/graph.js#L91-L109 "Source code on GitHub")
+[lib/graph.js:106-124](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L106-L124 "Source code on GitHub")
 
 **Extends GenericGraph**
 
 Class for a directed graph
 
-## UndirectedGraph
+### UndirectedGraph
 
-[lib/graph.js:114-133](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/graph.js#L114-L133 "Source code on GitHub")
+[lib/graph.js:131-150](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L131-L150 "Source code on GitHub")
 
 **Extends GenericGraph**
 
 Class for an undirected graph
 
-## Node
+### Node
 
-[lib/graph.js:154-171](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/graph.js#L154-L171 "Source code on GitHub")
+[lib/graph.js:173-190](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L173-L190 "Source code on GitHub")
 
 Class for a node on a graph
 
-## Edge
+### Edge
 
-[lib/graph.js:176-202](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/graph.js#L176-L202 "Source code on GitHub")
+[lib/graph.js:197-223](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/graph.js#L197-L223 "Source code on GitHub")
 
 Class for an edge on a graph
 
-## lib/mapping
+## mapping
 
-[lib/mapping.js:15-18](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L15-L18 "Source code on GitHub")
+[lib/mapping.js:19-42](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L19-L42 "Source code on GitHub")
 
-module with classes for mapping to an object
+**Extends Bed**
 
-**Parameters**
-
--   `obj`  
--   `params`  
+classes for mapping to an object
 
 ### Exon
 
-[lib/mapping.js:24-47](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L24-L47 "Source code on GitHub")
+[lib/mapping.js:19-42](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L19-L42 "Source code on GitHub")
 
 **Extends Bed**
 
@@ -102,13 +164,13 @@ Only mapping a single exon, requires a direction
 
 ### GenericMapping
 
-[lib/mapping.js:53-148](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L53-L148 "Source code on GitHub")
+[lib/mapping.js:49-144](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L49-L144 "Source code on GitHub")
 
 A generic mapping is like a transcript but does not require direction
 
 ### Transcript
 
-[lib/mapping.js:154-188](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L154-L188 "Source code on GitHub")
+[lib/mapping.js:151-185](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L151-L185 "Source code on GitHub")
 
 **Extends GenericMapping**
 
@@ -116,83 +178,163 @@ Transcript is a direction specific mapping
 
 ### AlignmentDerivedMapping
 
-[lib/mapping.js:193-199](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L193-L199 "Source code on GitHub")
+[lib/mapping.js:191-197](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L191-L197 "Source code on GitHub")
 
 **Extends GenericMapping**
 
 ### GenericTranscriptome
 
-[lib/mapping.js:204-234](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L204-L234 "Source code on GitHub")
+[lib/mapping.js:203-233](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L203-L233 "Source code on GitHub")
 
 ### Gene
 
-[lib/mapping.js:240-297](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/mapping.js#L240-L297 "Source code on GitHub")
+[lib/mapping.js:240-297](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/mapping.js#L240-L297 "Source code on GitHub")
 
 **Extends GenericTranscriptome**
 
 A canonical gene is a collection of transcripts at a single locus in a single direction.  This is a specific type of transcriptome.
 
-## PipeFitterGeneric
+## random
 
-[lib/streams.js:6-53](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L6-L53 "Source code on GitHub")
+[lib/random.js:14-48](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/random.js#L14-L48 "Source code on GitHub")
+
+classes for generating random sequences
+
+### RandomSeeded
+
+[lib/random.js:14-48](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/random.js#L14-L48 "Source code on GitHub")
+
+### uuid4
+
+[lib/random.js:54-81](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/random.js#L54-L81 "Source code on GitHub")
+
+## range
+
+[lib/range.js:13-52](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/range.js#L13-L52 "Source code on GitHub")
+
+classes for dealing with range data
+
+### Range
+
+[lib/range.js:13-52](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/range.js#L13-L52 "Source code on GitHub")
+
+### Bed
+
+[lib/range.js:58-129](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/range.js#L58-L129 "Source code on GitHub")
+
+**Extends Range**
+
+### BedArray
+
+[lib/range.js:136-207](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/range.js#L136-L207 "Source code on GitHub")
+
+An object to work with bed arrays
+
+## sequence
+
+[lib/sequence.js:17-115](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/sequence.js#L17-L115 "Source code on GitHub")
+
+classes to describe sequence data
+
+### GenericNucleotideSequence
+
+[lib/sequence.js:17-115](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/sequence.js#L17-L115 "Source code on GitHub")
+
+### rc_nt
+
+[lib/sequence.js:120-141](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/sequence.js#L120-L141 "Source code on GitHub")
+
+**Parameters**
+
+-   `nt`  
+
+### NucleotideSequence2Bit
+
+[lib/sequence.js:147-311](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/sequence.js#L147-L311 "Source code on GitHub")
+
+**Extends GenericNucleotideSequence**
+
+## splice
+
+[lib/splice.js:17-166](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/splice.js#L17-L166 "Source code on GitHub")
+
+classes for analyzing splices and isoform composition
+
+### SpliceAnalysis
+
+[lib/splice.js:17-166](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/splice.js#L17-L166 "Source code on GitHub")
+
+## streams
+
+[lib/streams.js:13-66](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L13-L66 "Source code on GitHub")
+
+classes to help work with streams
+
+### PipeFitterGeneric
+
+[lib/streams.js:13-66](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L13-L66 "Source code on GitHub")
 
 A Generic buffer for data in and out to fit output to a certain size
 
-### length
+#### constructor
 
-[lib/streams.js:13-15](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L13-L15 "Source code on GitHub")
+[lib/streams.js:20-22](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L20-L22 "Source code on GitHub")
 
-return the length of the current cache
+length of cached data
 
-### drain
+Type: [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
-[lib/streams.js:19-24](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L19-L24 "Source code on GitHub")
+#### length
 
-return any remaining data from the cache and clear the cache
+[lib/streams.js:29-31](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L29-L31 "Source code on GitHub")
 
-### add
+length of cached data
 
-[lib/streams.js:28-30](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L28-L30 "Source code on GitHub")
+Type: [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
-/\* add data to the cache
+#### drain
+
+[lib/streams.js:37-41](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L37-L41 "Source code on GitHub")
+
+remove any remaining bits
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** 
+
+#### add
+
+[lib/streams.js:46-48](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L46-L48 "Source code on GitHub")
+
+Add data to the buffer
 
 **Parameters**
 
 -   `indata`  
 
-### putback
+#### putback
 
-[lib/streams.js:34-40](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L34-L40 "Source code on GitHub")
+[lib/streams.js:53-59](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L53-L59 "Source code on GitHub")
 
-put data back in the beginning of the cache
+Add data to the read-end of the buffer
 
 **Parameters**
 
 -   `indata`  
 
-### remove
+### PipeFitterLowpass
 
-[lib/streams.js:44-46](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L44-L46 "Source code on GitHub")
-
-remove a chunk, must be overriden by child
-
-### ready
-
-[lib/streams.js:50-52](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L50-L52 "Source code on GitHub")
-
-determine if its ready to be read, must be overriden by child
-
-## PipeFitterLowpass
-
-[lib/streams.js:58-88](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L58-L88 "Source code on GitHub")
+[lib/streams.js:74-104](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L74-L104 "Source code on GitHub")
 
 **Extends PipeFitterGeneric**
 
 Ensure that chunks of <maxsize> are the largest data that can be read from the pipe
 
-## PipeFitterHighpass
+**Parameters**
 
-[lib/streams.js:93-112](https://github.com/jason-weirather/js-seq-tools/blob/c9460c88c7134c42df6f239f875d58d2e44a73c6/lib/streams.js#L93-L112 "Source code on GitHub")
+-   `maxsize` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum size of output chunks
+
+### PipeFitterHighpass
+
+[lib/streams.js:111-130](https://github.com/jason-weirather/js-seq-tools/blob/f850ddfdf092ab94a7e48563ba5504119f56a18a/lib/streams.js#L111-L130 "Source code on GitHub")
 
 **Extends PipeFitterGeneric**
 
