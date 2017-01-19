@@ -1,11 +1,9 @@
 // This is the entrypoint where we export our various modules
 // lets try and set these up by our directoy structure here
-const streams = require('./lib/streams');
-const alignment = require('./lib/alignment.js');
 
 const SEQTOOLS = {
-  streams:streams,
-  alignment:alignment,
+  streams:require('./lib/streams'),
+  alignment:require('./lib/alignment.js'),
   aligner:require('./lib/aligner.js'),
   graph:require('./lib/graph.js'),
   mapping:require('./lib/mapping.js'),
