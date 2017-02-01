@@ -38,15 +38,18 @@ const SEQTOOLS = {
 module.exports = SEQTOOLS;
 
 /**
+* The formats collection of modules contain a variety of more specifc types (see members for types). These should draw heavily on general objects and extend them whenever possible.
 * @namespace formats
 */
 
 /**
+* The alignment subset of formats contain specific types of alignments
 * @namespace alignment
 * @memberof formats
 */
 
 /**
+* The compression subset of formats contains compression formats
 * @namespace compression
 * @memberof formats
 */
