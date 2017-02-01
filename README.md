@@ -2,36 +2,135 @@
 
 ### Table of Contents
 
--   [alignment](#alignment)
+-   [formats](#formats)
+    -   [compression](#compression)
+        -   [bgzf](#bgzf)
+            -   [BGZFBlock](#bgzfblock)
+                -   [archive](#archive)
+                -   [data](#data)
+            -   [ToBGZFBlocks](#tobgzfblocks)
+            -   [BGZFBlockCache](#bgzfblockcache)
+                -   [add](#add)
+                -   [remove](#remove)
+            -   [BGZFDecompress](#bgzfdecompress)
+            -   [gunzip_block](#gunzip_block)
+            -   [BGZFCompress](#bgzfcompress)
+            -   [gzip_block](#gzip_block)
+            -   [BGZFDecompressionCache](#bgzfdecompressioncache)
+                -   [end](#end)
+                -   [has_data](#has_data)
+                -   [ready](#ready)
+                -   [write](#write)
+                -   [read](#read)
+    -   [alignment](#alignment)
+        -   [bam](#bam)
+            -   [DecompressedToBAMObj](#decompressedtobamobj)
+            -   [BAMObjToDecompressed](#bamobjtodecompressed)
+            -   [BAMInputStream](#baminputstream)
+            -   [BAMHeader](#bamheader)
+                -   [add_ref](#add_ref)
+                -   [n_ref](#n_ref)
+                -   [n_ref](#n_ref-1)
+                -   [magic](#magic)
+                -   [text](#text)
+                -   [set_from_sam_header2](#set_from_sam_header2)
+                -   [bam_data](#bam_data)
+            -   [BAM](#bam-1)
+                -   [bam_data](#bam_data-1)
+                -   [refName](#refname)
+                -   [next_refName](#next_refname)
+                -   [block_size](#block_size)
+                -   [refID](#refid)
+                -   [pos](#pos)
+                -   [name_l](#name_l)
+                -   [mapq](#mapq)
+                -   [bin](#bin)
+                -   [flag](#flag)
+                -   [n_cigar_op](#n_cigar_op)
+                -   [l_seq](#l_seq)
+                -   [next_refID](#next_refid)
+                -   [next_pos](#next_pos)
+                -   [tlen](#tlen)
+                -   [read_name](#read_name)
+                -   [cigar](#cigar)
+                -   [seq](#seq)
+                -   [qual](#qual)
+                -   [auxillary](#auxillary)
+            -   [BAMAuxillary](#bamauxillary)
+                -   [load_data](#load_data)
+                -   [tags](#tags)
+                -   [toString](#tostring)
+            -   [BAMSeq](#bamseq)
+                -   [load_data](#load_data-1)
+                -   [toString](#tostring-1)
+            -   [CIGAR](#cigar-1)
+                -   [toString](#tostring-2)
+                -   [load_data](#load_data-2)
+            -   [BamDataReader](#bamdatareader)
+                -   [add](#add-1)
+                -   [remove](#remove-1)
+        -   [sam](#sam)
+            -   [SAM](#sam-1)
+                -   [qseq](#qseq)
+                -   [rseq](#rseq)
+                -   [qname](#qname)
+                -   [direction](#direction)
+                -   [to_query_map](#to_query_map)
+                -   [to_reference_map](#to_reference_map)
+                -   [sam_line](#sam_line)
+                -   [refName](#refname-1)
+                -   [next_refName](#next_refname-1)
+                -   [pos](#pos-1)
+                -   [mapq](#mapq-1)
+                -   [flag](#flag-1)
+                -   [next_pos](#next_pos-1)
+                -   [tlen](#tlen-1)
+                -   [read_name](#read_name-1)
+                -   [cigar](#cigar-2)
+                -   [seq](#seq-1)
+                -   [qual](#qual-1)
+                -   [auxillary](#auxillary-1)
+                -   [bam_data](#bam_data-2)
+            -   [SAMAuxillary](#samauxillary)
+                -   [tags](#tags-1)
+                -   [bam_data](#bam_data-3)
+            -   [CIGAR](#cigar-3)
+                -   [ops](#ops)
+                -   [bam_data](#bam_data-4)
+            -   [DataToSAMObj](#datatosamobj)
+            -   [SAMHeader](#samheader)
+                -   [n_ref](#n_ref-2)
+                -   [bam_data](#bam_data-5)
+-   [alignment](#alignment-1)
     -   [GenericAlignment](#genericalignment)
         -   [min_intron](#min_intron)
         -   [ref](#ref)
-        -   [cigar](#cigar)
+        -   [cigar](#cigar-4)
         -   [aligned_length](#aligned_length)
         -   [psl_line](#psl_line)
-        -   [sam_line](#sam_line)
+        -   [sam_line](#sam_line-1)
         -   [pretty_print](#pretty_print)
-        -   [to_query_map](#to_query_map)
-        -   [to_reference_map](#to_reference_map)
+        -   [to_query_map](#to_query_map-1)
+        -   [to_reference_map](#to_reference_map-1)
 -   [aligner](#aligner)
     -   [private](#private)
         -   [SmithWatermanResults](#smithwatermanresults)
             -   [get_entry](#get_entry)
         -   [SmithWatermanAlignment](#smithwatermanalignment)
-            -   [qual](#qual)
-            -   [qname](#qname)
+            -   [qual](#qual-2)
+            -   [qname](#qname-1)
             -   [rname](#rname)
-            -   [tlen](#tlen)
-            -   [qseq](#qseq)
-            -   [rseq](#rseq)
-            -   [direction](#direction)
+            -   [tlen](#tlen-2)
+            -   [qseq](#qseq-1)
+            -   [rseq](#rseq-1)
+            -   [direction](#direction-1)
     -   [SmithWatermanAligner](#smithwatermanaligner)
         -   [align](#align)
 -   [basics](#basics)
     -   [Matrix](#matrix)
         -   [dim](#dim)
         -   [zero](#zero)
-        -   [toString](#tostring)
+        -   [toString](#tostring-3)
 -   [graph](#graph)
     -   [private](#private-1)
         -   [GenericGraph](#genericgraph)
@@ -82,20 +181,708 @@
         -   [constructor](#constructor)
         -   [length](#length)
         -   [drain](#drain)
-        -   [add](#add)
+        -   [add](#add-2)
         -   [putback](#putback)
     -   [PipeFitterLowpass](#pipefitterlowpass)
     -   [PipeFitterHighpass](#pipefitterhighpass)
 
+## formats
+
+The formats collection of modules contain a variety of more specifc types (see members for types). These should draw heavily on general objects and extend them whenever possible.
+
+### compression
+
+The compression subset of formats contains compression formats
+
+#### bgzf
+
+classes for accessing bgzf compression
+
+##### BGZFBlock
+
+Give on-demand block data and stats and take either unzipped or zipped data as an input
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.data` **[Buffer](https://nodejs.org/api/buffer.html)** data to use to make the BGZF block. must be smaller than max_block_size
+    -   `options.archive` **[Buffer](https://nodejs.org/api/buffer.html)** data is already compressed
+    -   `options.level` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** compression level (default 9)
+
+###### archive
+
+getter
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** archive - bgzf compressed data
+
+###### data
+
+getter
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** data - uncompressed data
+
+##### ToBGZFBlocks
+
+**Extends Transform**
+
+Stream data into BGZF Blocks for writing data, objects emitted have the property 'archive' that contains a Buffer of compressed data
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+##### BGZFBlockCache
+
+buffer data, and allow emitting entire gzip blocks at a time
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+###### add
+
+method to add put more data in the buffer
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** 
+
+###### remove
+
+remove data from the buffer
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** data_chunk - returns false if not enough data is ready
+
+##### BGZFDecompress
+
+**Extends Transform**
+
+stream compressed data in and uncompressed data out
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+##### gunzip_block
+
+PRE: Take a datablock begins with a gzip and can contain extra data
+POST: Return the uncompressed data and the extra data separately
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** compressed data
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** outdata - uncompressed data in an Object {data:Buffer,remainder:buffer}
+
+##### BGZFCompress
+
+**Extends Transform**
+
+stream uncompressed data in and compressed data out
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+##### gzip_block
+
+PRE: Take the uncompressed data not checked for max length since it must be fit going into this
+POST: Output bgzf zipped block
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** uncompressed data
+-   `inlevel` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** compression level recommend 9
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** outdata - compressed data
+
+##### BGZFDecompressionCache
+
+Cache class for decompressing BGZF files
+
+###### end
+
+trigger the flag that the data has ended
+
+###### has_data
+
+getter
+
+Returns **bool** has_data - true if there is data in there
+
+###### ready
+
+getter
+
+Returns **bool** ready - data is ready to be read
+
+###### write
+
+write data to the buffer
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** data is added to the cache
+
+###### read
+
+read / decompress data from the cache ... just one block. you need to call read repeatedly to read all if there is a lot
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** outdata - data is decompressed from one block
+
+### alignment
+
+The alignment subset of formats contain specific types of alignments
+
+#### bam
+
+**Extends Transform**
+
+classes for accessing BAM files
+
+##### DecompressedToBAMObj
+
+**Extends Transform**
+
+Take decompessed data and transform it to a bam object stream
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Transform options are passed to Transform parent
+
+##### BAMObjToDecompressed
+
+**Extends Transform**
+
+To facilite writing, convert bam objects into an uncompressed (pre bgzf compression) stream
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** passed to Transform class
+
+##### BAMInputStream
+
+**Extends Transform**
+
+Given input stream, output header and BAM objects
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** passed on to parent Transform
+
+##### BAMHeader
+
+**Extends formats.alignment.sam.SAMHeader**
+
+A BAM Header
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.bam_data` **[Buffer](https://nodejs.org/api/buffer.html)** can give the decompressed bytes
+
+###### add_ref
+
+Add a reference seqence name and corresponding length
+
+**Parameters**
+
+-   `name` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** of reference
+-   `length` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** of reference
+-   `l_ref`  
+
+###### n_ref
+
+Getter for the number of reference sequences
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** number of reference sequences
+
+###### n_ref
+
+Setter for number of reference sequences present
+
+**Parameters**
+
+-   `n_ref` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** as Int32LE
+-   `indata`  
+
+###### magic
+
+Setter for the magic number.  More of a sanity check because we know what it should be and this will throw an error if its incorrect.
+
+**Parameters**
+
+-   `magic` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** number as UInt32LE number (Not Buffer)
+-   `indata`  
+
+###### text
+
+Setter for text data of a header
+
+**Parameters**
+
+-   `header` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** text
+-   `indata`  
+
+###### set_from_sam_header2
+
+This may be deprecciated
+
+**Parameters**
+
+-   `n_ref` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** as Int32LE
+-   `intext`  
+
+###### bam_data
+
+Getter for the bam_data. return a buffer of BAM bytes.  The start of the BAM file but not yet bgzf compressed.
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam header data
+
+##### BAM
+
+**Extends sam.SAM**
+
+BAM is a child of SAM pretty much every getter of a sam should get overridden
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.bam_data` **[Buffer](https://nodejs.org/api/buffer.html)** required uncompressed bam data
+    -   `options.header` **BAMHeader** required BAMHeader object
+
+###### bam_data
+
+Getter for the bam_data. return a buffer of BAM bytes.  The start of the BAM file but not yet bgzf compressed.  Easy since it was required to create the BAM object in the first place.
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam entry data
+
+###### refName
+
+this one is always cached in case we are working as a SAM
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rname
+
+###### next_refName
+
+getter for the next_refName
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** next_rname
+
+###### block_size
+
+A BAM specific property
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** block_size in bytes
+
+###### refID
+
+A BAM specific property the refID is the index in the header
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** refID index
+
+###### pos
+
+The position in the reference sequence for first matching
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** pos
+
+###### name_l
+
+Getter for property of the length of the query name
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** name_l
+
+###### mapq
+
+Getter for MAPQ
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** MAPQ
+
+###### bin
+
+Getter for bin
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** bin
+
+###### flag
+
+Getter for flag
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** flag
+
+###### n_cigar_op
+
+Getter for number of cigar Ops
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** cigar op count
+
+###### l_seq
+
+Getter for the sequence length
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** query sequence length
+
+###### next_refID
+
+Getter for the next_refID index into header reference sequences
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** next_refID
+
+###### next_pos
+
+Getter for the next_pos
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** next_pos
+
+###### tlen
+
+Getter for the target sequence length
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** target sequence length
+
+###### read_name
+
+Getter for the query name. gets buffered upon reading
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** query name
+
+###### cigar
+
+Getter for the cigar, gets cached on read
+
+Returns **CIGAR** cigar object
+
+###### seq
+
+Getter for seq, gets cached on read
+
+Returns **BAMSeq** BAMSeq object
+
+###### qual
+
+Getter for quality
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Quality as a string
+
+###### auxillary
+
+Getter for auxillary data
+
+Returns **BAMAuxillary** Auxillary information object
+
+##### BAMAuxillary
+
+BAM Auxillary is provides a way to access the data inside a bam
+
+###### load_data
+
+load data into the BAMAuxillary object
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** 
+
+###### tags
+
+getter for tag
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** tag information in list \[[tag,valuetype,val],....]
+
+###### toString
+
+Get the string representation of the auxillary data
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** auxillary_data
+
+##### BAMSeq
+
+BAMSeq is an object to access the sequence data in the bam
+
+###### load_data
+
+load data into the BAMSeq object
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** 
+-   `slen` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** the sequence length
+
+###### toString
+
+Return the string representation of the sequence
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** sequence
+
+##### CIGAR
+
+CIGAR is an object to access the cigar string in the bam
+
+###### toString
+
+Return the string representation of the CIGAR
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** cigar string
+
+###### load_data
+
+load data into the CIGAR object
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** 
+
+##### BamDataReader
+
+A class to read data from a BAM. is a helper class to other streamers
+
+**Parameters**
+
+-   `header` **BAMHeader** (can be left unset of undefined)
+
+###### add
+
+add an arbitrary amount of data to the data buffer
+
+**Parameters**
+
+-   `indata` **[Buffer](https://nodejs.org/api/buffer.html)** 
+
+###### remove
+
+add an arbitrary amount of data to the data buffer or remove available data that could be a header or an entry
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** output
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** output.data - a bam entry as a Buffer
+
+Returns **BAMHeader** output.header - a bam header
+
+#### sam
+
+**Extends GenericAlignment**
+
+classes for accessing SAM files
+
+##### SAM
+
+**Extends alignment.GenericAlignment**
+
+SAM is a version of a GenericAlignment
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.sam_line` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** a complete sam line
+
+###### qseq
+
+override query sequence getter for generic access
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** qseq - query sequence
+
+###### rseq
+
+Get or Set the reference sequence
+
+Returns **Sequence** rseq - reference sequence
+
+###### qname
+
+Return the query name
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** qname
+
+###### direction
+
+provide the direction
+
+Returns **Char** direction - the strand + or -
+
+###### to_query_map
+
+get the mapping on the query
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** can pass options to AlignmentDerivedMapping
+
+Returns **AlignmentDerviedMapping** mapping
+
+###### to_reference_map
+
+get the mapping on the reference
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** can pass options to AlignmentDerivedMapping
+
+Returns **AlignmentDerviedMapping** mapping
+
+###### sam_line
+
+set/get the sam line
+
+**Parameters**
+
+-   `intext` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** provide a sam line
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** sam_line
+
+###### refName
+
+getter
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** refName - the name of the referenc sequence
+
+###### next_refName
+
+getter
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** next_refName - the name of the next referenc sequence
+
+###### pos
+
+getter
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** pos - the 1-based index where first aligned base is
+
+###### mapq
+
+getter
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** mapq - the number representation of the mapping quality
+
+###### flag
+
+getter
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** flag - the number representation of the map
+
+###### next_pos
+
+getter
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** next_pos - the 1-based index of the next position
+
+###### tlen
+
+getter
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** tlen - the length of the target (reference) sequence
+
+###### read_name
+
+getter
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** read_name - the query name
+
+###### cigar
+
+getter - cached if called
+
+Returns **CIGAR** cigar - return a cigar object
+
+###### seq
+
+getter
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** seq - return a seq string representation
+
+###### qual
+
+getter
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** qual - return a qual string representation
+
+###### auxillary
+
+getter
+
+Returns **SAMAuxillary** auxillary - return an object for accessing auxillary data
+
+###### bam_data
+
+getter - very difficult function constructs the bam dat afrom a buffer (prior to bgzf compression)
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam_data - return byte-wise buffer data
+
+##### SAMAuxillary
+
+SAMAuxillary provides access to the auxillary tags and data in the SAM file
+
+**Parameters**
+
+-   `aux` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** An array of auxillary tags/information
+
+###### tags
+
+getter - get an array of exta data.  the data (3rd) field of data is Number if its numerical.
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** tags - return an array of data \[[tag1,type1,data1],...]
+
+###### bam_data
+
+getter - get uncompressed bytes representing the auxillary info
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam_data
+
+##### CIGAR
+
+Class to describe a CIGAR sequence
+
+**Parameters**
+
+-   `cigar_string` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** input the cigar string as a string type
+
+###### ops
+
+getter - get cigar opps
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** ops - Ops like \[[op1,length2],[op2,length2]...]
+
+###### bam_data
+
+getter - get uncompressed bytes representing the CIGAR
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam_data
+
+##### DataToSAMObj
+
+**Extends Transform**
+
+Class to read in SAM objects from a data stream - will emit data objects in the form of an Object with either the header property which contains the header object, or the sam_line property with the SAM line string
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for the transform object
+
+##### SAMHeader
+
+Class to describe a SAMheader
+
+**Parameters**
+
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** options for the transform object
+    -   `options.text` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** the header data
+
+###### n_ref
+
+getter - the number of reference sequences
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** n_ref
+
+###### bam_data
+
+getter - the uncompressed bam data representation of the header
+
+Returns **[Buffer](https://nodejs.org/api/buffer.html)** bam_data
+
 ## alignment
 
-[lib/alignment.js:16-353](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L16-L353 "Source code on GitHub")
-
-Classes containing alignments
+This module has the most general classes for defining an alignment.  These should be extended whenever possible by more specific alignment formats under formats.alignment.\*
 
 ### GenericAlignment
-
-[lib/alignment.js:16-353](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L16-L353 "Source code on GitHub")
 
 **Parameters**
 
@@ -103,8 +890,6 @@ Classes containing alignments
     -   `options.min_intron` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** The smallest size gap to consider an intron. (optional, default `68`)
 
 #### min_intron
-
-[lib/alignment.js:61-63](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L61-L63 "Source code on GitHub")
 
 Getter and setter for minimum gap in reference to be considered an intron
 
@@ -116,8 +901,6 @@ Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 #### ref
 
-[lib/alignment.js:75-77](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L75-L77 "Source code on GitHub")
-
 Set the reference dictionary
 
 **Parameters**
@@ -126,15 +909,11 @@ Set the reference dictionary
 
 #### cigar
 
-[lib/alignment.js:86-110](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L86-L110 "Source code on GitHub")
-
 A getter to retrieve the CIGAR string
 
 Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** CIGAR - is a getter for the cigar string
 
 #### aligned_length
-
-[lib/alignment.js:119-125](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L119-L125 "Source code on GitHub")
 
 A getter for the aligned length of the sequence
 
@@ -142,23 +921,17 @@ Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 #### psl_line
 
-[lib/alignment.js:134-172](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L134-L172 "Source code on GitHub")
-
 A getter for the aligned length of the sequence. Requires qseq and rseq or cigar and tlen.
 
 Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** length
 
 #### sam_line
 
-[lib/alignment.js:226-256](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L226-L256 "Source code on GitHub")
-
 A getter for the SAM format line.  Requires qname and rname.
 
 Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** sam_line
 
 #### pretty_print
-
-[lib/alignment.js:265-320](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L265-L320 "Source code on GitHub")
 
 Make a pretty print of the alignment.  Requires qseq and rseq.
 
@@ -170,8 +943,6 @@ Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 #### to_query_map
 
-[lib/alignment.js:329-336](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L329-L336 "Source code on GitHub")
-
 Convert the alignment into a mapping along the query
 
 **Parameters**
@@ -181,8 +952,6 @@ Convert the alignment into a mapping along the query
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Returns and AlignmentDerivedMapping object
 
 #### to_reference_map
-
-[lib/alignment.js:345-352](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/alignment.js#L345-L352 "Source code on GitHub")
 
 Convert the alignment into a mapping along the reference
 
@@ -194,19 +963,13 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## aligner
 
-[lib/aligner.js:27-173](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L27-L173 "Source code on GitHub")
-
-Contains classes for doing alignments
+This module contains classes for DOING alignments.  See alignment for the general definition of an alignment.
 
 ### private
-
-[lib/aligner.js:27-173](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L27-L173 "Source code on GitHub")
 
 Members are not exported
 
 #### SmithWatermanResults
-
-[lib/aligner.js:27-173](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L27-L173 "Source code on GitHub")
 
 A class for generating results from a Smith-Waterman aligner
 
@@ -220,8 +983,6 @@ A class for generating results from a Smith-Waterman aligner
 
 ##### get_entry
 
-[lib/aligner.js:47-140](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L47-L140 "Source code on GitHub")
-
 Get the alignment stored at the input index
 
 **Parameters**
@@ -231,8 +992,6 @@ Get the alignment stored at the input index
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** SmithWatermanAlignment
 
 #### SmithWatermanAlignment
-
-[lib/aligner.js:284-378](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L284-L378 "Source code on GitHub")
 
 **Extends GenericAlignment**
 
@@ -249,15 +1008,11 @@ A single alignment from among Smith-Waterman aligner results. This is not create
 
 ##### qual
 
-[lib/aligner.js:308-310](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L308-L310 "Source code on GitHub")
-
 getter, but Quality is not set and not available
 
 Returns **[undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)** undefined
 
 ##### qname
-
-[lib/aligner.js:318-320](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L318-L320 "Source code on GitHub")
 
 getter for name of Query
 
@@ -265,15 +1020,11 @@ Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ##### rname
 
-[lib/aligner.js:331-333](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L331-L333 "Source code on GitHub")
-
 getter for name of Reference
 
 Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rname
 
 ##### tlen
-
-[lib/aligner.js:341-343](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L341-L343 "Source code on GitHub")
 
 getter for length of the reference (target) sequence
 
@@ -281,15 +1032,11 @@ Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ##### qseq
 
-[lib/aligner.js:351-355](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L351-L355 "Source code on GitHub")
-
 getter for query sequence
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Sequence
 
 ##### rseq
-
-[lib/aligner.js:363-365](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L363-L365 "Source code on GitHub")
 
 getter for reference sequence
 
@@ -297,15 +1044,11 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ##### direction
 
-[lib/aligner.js:374-377](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L374-L377 "Source code on GitHub")
-
 getter for direction
 
 Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** direction - Strand +/-
 
 ### SmithWatermanAligner
-
-[lib/aligner.js:186-270](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L186-L270 "Source code on GitHub")
 
 A class for performing a local alignment
 
@@ -320,8 +1063,6 @@ A class for performing a local alignment
 
 #### align
 
-[lib/aligner.js:206-211](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/aligner.js#L206-L211 "Source code on GitHub")
-
 Execute the alignment
 
 **Parameters**
@@ -334,13 +1075,9 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## basics
 
-[lib/basics.js:14-63](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/basics.js#L14-L63 "Source code on GitHub")
-
-basic objects of universal importance
+basic objects for very general use
 
 ### Matrix
-
-[lib/basics.js:14-63](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/basics.js#L14-L63 "Source code on GitHub")
 
 **Parameters**
 
@@ -349,21 +1086,15 @@ basic objects of universal importance
 
 #### dim
 
-[lib/basics.js:32-32](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/basics.js#L32-L32 "Source code on GitHub")
-
 Get the dimensions of the matrix
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** dimensions object with m and n properties
 
 #### zero
 
-[lib/basics.js:39-45](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/basics.js#L39-L45 "Source code on GitHub")
-
 Set all elements of the matrix to zero
 
 #### toString
-
-[lib/basics.js:53-62](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/basics.js#L53-L62 "Source code on GitHub")
 
 Get a string with what the matrix looks like
 
@@ -371,19 +1102,13 @@ Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## graph
 
-[lib/graph.js:22-164](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L22-L164 "Source code on GitHub")
-
-classes for describing graphs
+module with classes for describing graphs
 
 ### private
-
-[lib/graph.js:22-164](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L22-L164 "Source code on GitHub")
 
 classes for describing graphs
 
 #### GenericGraph
-
-[lib/graph.js:22-164](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L22-L164 "Source code on GitHub")
 
 Generic graph should be overridden
 
@@ -394,23 +1119,17 @@ Generic graph should be overridden
 
 ##### node_count
 
-[lib/graph.js:40-43](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L40-L43 "Source code on GitHub")
-
 getter for node_count
 
 Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** number of nodes
 
 ##### edge_count
 
-[lib/graph.js:52-55](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L52-L55 "Source code on GitHub")
-
 getter for edge_count
 
 Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** number of edges
 
 ##### add_node
-
-[lib/graph.js:63-66](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L63-L66 "Source code on GitHub")
 
 add a node to the graph. cannot be one thats already been added
 
@@ -420,15 +1139,11 @@ add a node to the graph. cannot be one thats already been added
 
 ##### id
 
-[lib/graph.js:75-77](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L75-L77 "Source code on GitHub")
-
 getter for the unique id for this graph
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** id -  the uuid4 that was set for this object
 
 ##### id
-
-[lib/graph.js:274-276](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L274-L276 "Source code on GitHub")
 
 getter for the unique id for this node
 
@@ -436,15 +1151,11 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ##### id
 
-[lib/graph.js:360-362](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L360-L362 "Source code on GitHub")
-
 getter for id
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** uuid
 
 ##### nodes
-
-[lib/graph.js:86-93](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L86-L93 "Source code on GitHub")
 
 getter for a list of the nodes in this graph
 
@@ -452,23 +1163,17 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ##### nodes
 
-[lib/graph.js:371-375](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L371-L375 "Source code on GitHub")
-
 getter for dictionary of nodes
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** node_id_dictionary
 
 ##### split_unconnected
 
-[lib/graph.js:101-124](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L101-L124 "Source code on GitHub")
-
 get a list of graphs that are not connected that are subsets of the original
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** graphs - list of unconnected graphs
 
 ##### get_edges_by_node
-
-[lib/graph.js:133-136](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L133-L136 "Source code on GitHub")
 
 get a list of edges that are associated with a node
 
@@ -479,8 +1184,6 @@ get a list of edges that are associated with a node
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** edges - list of edges
 
 ##### get_connected_nodes
-
-[lib/graph.js:146-163](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L146-L163 "Source code on GitHub")
 
 get a list of nodes that are connected to a node. this can be called recursively
 
@@ -493,23 +1196,17 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ##### name
 
-[lib/graph.js:285-287](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L285-L287 "Source code on GitHub")
-
 getter for the name
 
 Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 
 ##### payload
 
-[lib/graph.js:296-298](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L296-L298 "Source code on GitHub")
-
 getter for the payload
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** payload
 
 ##### payload
-
-[lib/graph.js:327-329](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L327-L329 "Source code on GitHub")
 
 getter for the payload
 
@@ -517,23 +1214,17 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ##### node1
 
-[lib/graph.js:338-340](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L338-L340 "Source code on GitHub")
-
 getter for node1
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** node1
 
 ##### node2
 
-[lib/graph.js:349-351](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L349-L351 "Source code on GitHub")
-
 getter for node1
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** node2
 
 ### DirectedGraph
-
-[lib/graph.js:173-197](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L173-L197 "Source code on GitHub")
 
 **Extends GenericGraph**
 
@@ -545,8 +1236,6 @@ Class for a directed graph
 
 #### add_edge
 
-[lib/graph.js:184-196](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L184-L196 "Source code on GitHub")
-
 **Extends graph.DirectedGraph**
 
 Add an edge to the graph
@@ -556,8 +1245,6 @@ Add an edge to the graph
 -   `input_edge` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### UndirectedGraph
-
-[lib/graph.js:206-232](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L206-L232 "Source code on GitHub")
 
 **Extends GenericGraph**
 
@@ -569,8 +1256,6 @@ Class for an undirected graph
 
 #### add_edge
 
-[lib/graph.js:218-231](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L218-L231 "Source code on GitHub")
-
 Add an edge to the graph
 
 **Parameters**
@@ -578,8 +1263,6 @@ Add an edge to the graph
 -   `input_edge` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### Node
-
-[lib/graph.js:258-299](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L258-L299 "Source code on GitHub")
 
 Class for a node on a graph
 
@@ -590,8 +1273,6 @@ Class for a node on a graph
     -   `options.name` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** set a name if you want
 
 ### Edge
-
-[lib/graph.js:310-376](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/graph.js#L310-L376 "Source code on GitHub")
 
 Class for an edge on a graph
 
@@ -604,15 +1285,11 @@ Class for an edge on a graph
 
 ## mapping
 
-[lib/mapping.js:19-42](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L19-L42 "Source code on GitHub")
-
 **Extends Bed**
 
-classes for mapping to an object
+This module contains the most general classes for describing how an object is mapped to a sequence.  This would include the very general basis for gpd and bed12 formats etc...
 
 ### Exon
-
-[lib/mapping.js:19-42](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L19-L42 "Source code on GitHub")
 
 **Extends Bed**
 
@@ -620,13 +1297,9 @@ Only mapping a single exon, requires a direction
 
 ### GenericMapping
 
-[lib/mapping.js:49-144](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L49-L144 "Source code on GitHub")
-
 A generic mapping is like a transcript but does not require direction
 
 ### Transcript
-
-[lib/mapping.js:152-186](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L152-L186 "Source code on GitHub")
 
 **Extends GenericMapping**
 
@@ -634,17 +1307,11 @@ Transcript is a direction specific mapping
 
 ### AlignmentDerivedMapping
 
-[lib/mapping.js:193-199](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L193-L199 "Source code on GitHub")
-
 **Extends GenericMapping**
 
 ### GenericTranscriptome
 
-[lib/mapping.js:205-235](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L205-L235 "Source code on GitHub")
-
 ### Gene
-
-[lib/mapping.js:243-300](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/mapping.js#L243-L300 "Source code on GitHub")
 
 **Extends GenericTranscriptome**
 
@@ -652,53 +1319,33 @@ A canonical gene is a collection of transcripts at a single locus in a single di
 
 ## random
 
-[lib/random.js:14-48](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/random.js#L14-L48 "Source code on GitHub")
-
-classes for generating random sequences
+classes for generating random sequences or other randomness
 
 ### RandomSeeded
 
-[lib/random.js:14-48](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/random.js#L14-L48 "Source code on GitHub")
-
 ### uuid4
-
-[lib/random.js:54-81](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/random.js#L54-L81 "Source code on GitHub")
 
 ## range
 
-[lib/range.js:13-52](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/range.js#L13-L52 "Source code on GitHub")
-
-classes for dealing with range data
+classes for dealing with range data, including genomic range and building from range, to genomic range, to exons etc...
 
 ### Range
 
-[lib/range.js:13-52](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/range.js#L13-L52 "Source code on GitHub")
-
 ### Bed
-
-[lib/range.js:59-130](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/range.js#L59-L130 "Source code on GitHub")
 
 **Extends Range**
 
 ### BedArray
 
-[lib/range.js:137-208](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/range.js#L137-L208 "Source code on GitHub")
-
 An object to work with bed arrays
 
 ## sequence
 
-[lib/sequence.js:17-115](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/sequence.js#L17-L115 "Source code on GitHub")
-
-classes to describe sequence data
+module with classes to describe sequence data
 
 ### GenericNucleotideSequence
 
-[lib/sequence.js:17-115](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/sequence.js#L17-L115 "Source code on GitHub")
-
 ### rc_nt
-
-[lib/sequence.js:121-142](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/sequence.js#L121-L142 "Source code on GitHub")
 
 **Parameters**
 
@@ -706,35 +1353,23 @@ classes to describe sequence data
 
 ### NucleotideSequence2Bit
 
-[lib/sequence.js:148-312](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/sequence.js#L148-L312 "Source code on GitHub")
-
 **Extends GenericNucleotideSequence**
 
 ## splice
-
-[lib/splice.js:17-166](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/splice.js#L17-L166 "Source code on GitHub")
 
 classes for analyzing splices and isoform composition
 
 ### SpliceAnalysis
 
-[lib/splice.js:17-166](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/splice.js#L17-L166 "Source code on GitHub")
-
 ## streams
 
-[lib/streams.js:13-66](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L13-L66 "Source code on GitHub")
-
-classes to help work with streams
+module with classes to help work with streams
 
 ### PipeFitterGeneric
-
-[lib/streams.js:13-66](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L13-L66 "Source code on GitHub")
 
 A Generic buffer for data in and out to fit output to a certain size
 
 #### constructor
-
-[lib/streams.js:20-22](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L20-L22 "Source code on GitHub")
 
 length of cached data
 
@@ -742,23 +1377,17 @@ Type: [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
 #### length
 
-[lib/streams.js:29-31](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L29-L31 "Source code on GitHub")
-
 length of cached data
 
 Type: [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
 #### drain
 
-[lib/streams.js:37-41](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L37-L41 "Source code on GitHub")
-
 remove any remaining bits
 
 Returns **[Buffer](https://nodejs.org/api/buffer.html)** 
 
 #### add
-
-[lib/streams.js:46-48](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L46-L48 "Source code on GitHub")
 
 Add data to the buffer
 
@@ -768,8 +1397,6 @@ Add data to the buffer
 
 #### putback
 
-[lib/streams.js:53-59](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L53-L59 "Source code on GitHub")
-
 Add data to the read-end of the buffer
 
 **Parameters**
@@ -777,8 +1404,6 @@ Add data to the read-end of the buffer
 -   `indata`  
 
 ### PipeFitterLowpass
-
-[lib/streams.js:74-104](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L74-L104 "Source code on GitHub")
 
 **Extends PipeFitterGeneric**
 
@@ -789,8 +1414,6 @@ Ensure that chunks of <maxsize> are the largest data that can be read from the p
 -   `maxsize` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum size of output chunks
 
 ### PipeFitterHighpass
-
-[lib/streams.js:111-130](https://github.com/jason-weirather/js-seq-tools/blob/f50ed98fc4868d62e617a57db3ec4ec30af35edf/lib/streams.js#L111-L130 "Source code on GitHub")
 
 **Extends PipeFitterGeneric**
 
