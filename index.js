@@ -26,8 +26,9 @@ const SEQTOOLS = {
     sam:require('./lib/formats/alignment/sam.js')
                 },
     mapping: {
-    GPD:require('./lib/formats/mapping/GPD.js'),
-    GFF:require('./lib/formats/mapping/GFF.js')
+    gpd:require('./lib/formats/mapping/gpd.js'),
+    gff:require('./lib/formats/mapping/gff.js'),
+    gffbasic:require('./lib/formats/mapping/gffbasic.js')
              },
     sequence: {
       fasta:require('./lib/formats/sequence/fasta.js')
@@ -51,5 +52,11 @@ module.exports = SEQTOOLS;
 /**
 * The compression subset of formats contains compression formats
 * @namespace compression
+* @memberof formats
+*/
+
+/**
+* these modules are for dealing with data that describs mapped locations on reference genomes
+* @namespace mapping
 * @memberof formats
 */
