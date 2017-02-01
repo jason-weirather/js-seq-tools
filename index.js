@@ -1,13 +1,4 @@
 /**
-* @namespace formats
-*/
-
-/**
-* @namespace alignment
-* @memberof formats
-*/
-
-/**
 * @private
 * Global for contains a pure javascript set objects to represent biological data
 */
@@ -45,3 +36,17 @@ const SEQTOOLS = {
 }
 
 module.exports = SEQTOOLS;
+
+/**
+* @namespace formats
+*/
+
+/**
+* @namespace alignment
+* @memberof formats
+*/
+
+/**
+* @namespace compression
+* @memberof formats
+*/
